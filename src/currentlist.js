@@ -20,14 +20,14 @@ const OneStudent = React.createClass({
   render() {
     return (
       <li>
+      <button className="btn btn-default" onClick={this.deleteStudent}>
+      Delete
+      </button>
+      <button className="btn btn-primary" onClick={this.updateButtonClick}>
+      Update
+      </button>
         {this.props.studentText}
         <EditForm hidden={this.state.visible} formVisible={this.setFormHidden} updateStudent={this.props.updateStudent} studentId={this.props.studentId} studentText={this.props.studentText}/>
-        <button className="btn btn-default" onClick={this.deleteStudent}>
-          Delete
-        </button>
-        <button className="btn btn-primary" onClick={this.updateButtonClick}>
-          Update
-        </button>
       </li>
     )
   }

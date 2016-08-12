@@ -11,6 +11,7 @@ const PickStudent = React.createClass({
     let randomStudents = _.shuffle(this.props.currStudents);
     let randomStudent = randomStudents[0].text;
     this.setState({studentName: randomStudent});
+    //this.setState({studentName: "Juan Carlos"});
   },
   render() {
     return (

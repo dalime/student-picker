@@ -31205,10 +31205,6 @@
 
 	var _pickteam2 = _interopRequireDefault(_pickteam);
 
-	var _editform = __webpack_require__(185);
-
-	var _editform2 = _interopRequireDefault(_editform);
-
 	var _currentlist = __webpack_require__(186);
 
 	var _currentlist2 = _interopRequireDefault(_currentlist);
@@ -31256,15 +31252,27 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_addstudent2.default, { testBtn: this.test, add: this.addStudent }),
 	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        'Student List'
+	        'div',
+	        { className: 'col-sm-4 col-md-4 col-lg-4' },
+	        _react2.default.createElement(_addstudent2.default, { testBtn: this.test, add: this.addStudent }),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Student List'
+	        ),
+	        _react2.default.createElement(_currentlist2.default, { currStudents: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent })
 	      ),
-	      _react2.default.createElement(_currentlist2.default, { currStudents: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent }),
-	      _react2.default.createElement(_pickstudent2.default, { currStudents: this.state.students }),
-	      _react2.default.createElement(_pickteam2.default, { currStudents: this.state.students })
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-sm-4 col-md-4 col-lg-4' },
+	        _react2.default.createElement(_pickstudent2.default, { currStudents: this.state.students })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-sm-4 col-md-4 col-lg-4' },
+	        _react2.default.createElement(_pickteam2.default, { currStudents: this.state.students })
+	      )
 	    );
 	  }
 	});
@@ -31302,6 +31310,7 @@
 	    var randomStudents = _lodash2.default.shuffle(this.props.currStudents);
 	    var randomStudent = randomStudents[0].text;
 	    this.setState({ studentName: randomStudent });
+	    //this.setState({studentName: "Juan Carlos"});
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -31495,8 +31504,6 @@
 	    return _react2.default.createElement(
 	      'li',
 	      null,
-	      this.props.studentText,
-	      _react2.default.createElement(_editform2.default, { hidden: this.state.visible, formVisible: this.setFormHidden, updateStudent: this.props.updateStudent, studentId: this.props.studentId, studentText: this.props.studentText }),
 	      _react2.default.createElement(
 	        'button',
 	        { className: 'btn btn-default', onClick: this.deleteStudent },
@@ -31506,7 +31513,9 @@
 	        'button',
 	        { className: 'btn btn-primary', onClick: this.updateButtonClick },
 	        'Update'
-	      )
+	      ),
+	      this.props.studentText,
+	      _react2.default.createElement(_editform2.default, { hidden: this.state.visible, formVisible: this.setFormHidden, updateStudent: this.props.updateStudent, studentId: this.props.studentId, studentText: this.props.studentText })
 	    );
 	  }
 	});

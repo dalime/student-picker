@@ -4,7 +4,6 @@ import uuid from 'uuid';
 import AddStudent from './addstudent.js';
 import PickStudent from './pickstudent.js';
 import PickTeam from './pickteam.js';
-import EditForm from './editform.js';
 import CurrentList from './currentlist.js';
 
 const StudentList = React.createClass({
@@ -46,11 +45,17 @@ const StudentList = React.createClass({
   render() {
     return (
       <div>
-        <AddStudent testBtn={this.test} add={this.addStudent} />
-        <h2>Student List</h2>
-        <CurrentList currStudents={this.state.students} delete={this.deleteStudent} update={this.updateStudent} />
-        <PickStudent currStudents={this.state.students}/>
-        <PickTeam currStudents={this.state.students} />
+        <div className="col-sm-4 col-md-4 col-lg-4">
+          <AddStudent testBtn={this.test} add={this.addStudent} />
+          <h2>Student List</h2>
+          <CurrentList currStudents={this.state.students} delete={this.deleteStudent} update={this.updateStudent} />
+        </div>
+        <div className="col-sm-4 col-md-4 col-lg-4">
+          <PickStudent currStudents={this.state.students}/>
+        </div>
+        <div className="col-sm-4 col-md-4 col-lg-4">
+          <PickTeam currStudents={this.state.students} />
+        </div>
       </div>
     )
   }
