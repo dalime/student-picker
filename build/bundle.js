@@ -30904,7 +30904,7 @@
 	      text: this.state.text,
 	      id: (0, _uuid2.default)()
 	    };
-	    return student;
+	    this.props.add(student);
 	  },
 	  onInputChange: function onInputChange(event) {
 	    this.setState({ text: event.target.value });
@@ -30918,12 +30918,7 @@
 	        null,
 	        'Add New Student'
 	      ),
-	      _react2.default.createElement(AddStudentForm, { newText: this.state.text, onInputChange: this.onInputChange, addStudent: this.addStudent }),
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.props.testBtn },
-	        'Test'
-	      )
+	      _react2.default.createElement(AddStudentForm, { newText: this.state.text, onInputChange: this.onInputChange, addStudent: this.addStudent })
 	    );
 	  }
 	});
@@ -31182,20 +31177,24 @@
 	var OneStudent = _react2.default.createClass({
 	  displayName: 'OneStudent',
 	  render: function render() {
-	    return _react2.default.createElement('h5', null);
+	    return _react2.default.createElement(
+	      'li',
+	      null,
+	      this.props.studentText
+	    );
 	  }
 	});
 
 	var CurrentList = _react2.default.createClass({
 	  displayName: 'CurrentList',
 	  render: function render() {
-	    var students = this.props.students.map(function (student) {
-	      _react2.default.createElement(OneStudent, null);
+	    var studentList = this.props.currStudents.map(function (student) {
+	      _react2.default.createElement(OneStudent, { key: student.id, studentId: student.id, studentText: student.text });
 	    });
 	    return _react2.default.createElement(
-	      'div',
-	      { className: 'container' },
-	      students
+	      'ul',
+	      null,
+	      studentList
 	    );
 	  }
 	});
@@ -31213,15 +31212,11 @@
 	  componentDidUpdate: function componentDidUpdate() {
 	    localStorage.students = JSON.stringify(this.state.students);
 	  },
-	  test: function test() {
-	    console.log("hello");
-	  },
-	  addStudent: function addStudent() {
-	    var newStudent = _addstudent2.default.props.addStudent;
-	    console.log(newStudent);
-	    /*this.setState({
-	      students: this.state.students.concat(newStudent)
-	    })*/
+	  addStudent: function addStudent(student) {
+	    console.log(student);
+	    this.setState({
+	      students: this.state.students.concat(student)
+	    });
 	  },
 	  deleteStudent: function deleteStudent(studentId) {
 	    var deleteArr = this.state.students.filter(function (student) {
@@ -31246,13 +31241,13 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
+	      _react2.default.createElement(_addstudent2.default, { testBtn: this.test, add: this.addStudent }),
 	      _react2.default.createElement(
 	        'h2',
 	        null,
 	        'Student List'
 	      ),
-	      _react2.default.createElement(CurrentList, { students: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent }),
-	      _react2.default.createElement(_addstudent2.default, { testBtn: this.test })
+	      _react2.default.createElement(CurrentList, { currStudents: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent })
 	    );
 	  }
 	});

@@ -6,20 +6,22 @@ import AddStudent from './addstudent.js';
 const OneStudent = React.createClass({
   render() {
     return (
-      <h5></h5>
+      <li>
+        {this.props.studentText}
+      </li>
     )
   }
 })
 
 const CurrentList = React.createClass({
   render() {
-    let students = this.props.students.map(student => {
-      <OneStudent />
-    });
+    let studentList = this.props.currStudents.map(student => {
+      <OneStudent key={student.id} studentId={student.id} studentText={student.text}/>
+    })
     return (
-      <div className="container">
-        {students}
-      </div>
+      <ul>
+        {studentList}
+      </ul>
     )
   }
 })
@@ -36,15 +38,11 @@ const StudentList = React.createClass({
   componentDidUpdate() {
     localStorage.students = JSON.stringify(this.state.students);
   },
-  test() {
-    console.log("hello");
-  },
-  addStudent() {
-    let newStudent = AddStudent.props.addStudent;
-    console.log(newStudent);
-    /*this.setState({
-      students: this.state.students.concat(newStudent)
-    })*/
+  addStudent(student) {
+    console.log(student);
+    this.setState({
+      students: this.state.students.concat(student)
+    });
   },
   deleteStudent(studentId) {
     let deleteArr = this.state.students.filter(student => {
@@ -68,9 +66,9 @@ const StudentList = React.createClass({
   render() {
     return (
       <div>
+        <AddStudent testBtn={this.test} add={this.addStudent} />
         <h2>Student List</h2>
-        <CurrentList students={this.state.students} delete={this.deleteStudent} update={this.updateStudent}/>
-        <AddStudent testBtn={this.test}/>
+        <CurrentList currStudents={this.state.students} delete={this.deleteStudent} update={this.updateStudent} />
       </div>
     )
   }

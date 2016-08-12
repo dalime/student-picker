@@ -24,7 +24,7 @@ const AddStudent = React.createClass({
       text: this.state.text,
       id: uuid()
     };
-    return student;
+    this.props.add(student);
   },
   onInputChange(event) {
     this.setState({text: event.target.value});
@@ -34,7 +34,6 @@ const AddStudent = React.createClass({
       <div>
         <h2>Add New Student</h2>
         <AddStudentForm newText={this.state.text} onInputChange={this.onInputChange} addStudent={this.addStudent}/>
-        <button onClick={this.props.testBtn}>Test</button>
       </div>
     )
   }
