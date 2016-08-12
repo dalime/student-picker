@@ -15,9 +15,18 @@ const PickStudent = React.createClass({
   },
   render() {
     return (
-      <div>
-        <button onClick={this.pickStudent}>Pick Student</button>
-        <label>{this.state.studentName}</label>
+      <div className="container">
+        <div className="row">
+          <button onClick={this.pickStudent}>Pick Student</button>
+        </div>
+        <div id="victim">
+          <div className="row">
+            <h3>Victim: </h3>
+          </div>
+          <div className="row">
+            <h1>{this.state.studentName}</h1>
+          </div>
+        </div>
       </div>
     )
   }

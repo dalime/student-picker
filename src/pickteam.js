@@ -38,7 +38,7 @@ const PickTeam = React.createClass({
   },
   render() {
     return (
-      <div>
+      <div className="container">
         <input id="iptTeam" type="number" onChange={this.onInputChange} min="2" placeholder="2"/>
         <button onClick={this.pickTeam}>Pick Team</button>
         <TeamList teamNames={this.state.teams}/>

@@ -31255,22 +31255,40 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'col-sm-4 col-md-4 col-lg-4' },
-	        _react2.default.createElement(_addstudent2.default, { testBtn: this.test, add: this.addStudent }),
 	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Student List'
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(_addstudent2.default, { testBtn: this.test, add: this.addStudent })
 	        ),
-	        _react2.default.createElement(_currentlist2.default, { currStudents: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Student List'
+	          ),
+	          _react2.default.createElement(_currentlist2.default, { currStudents: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent })
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'col-sm-4 col-md-4 col-lg-4' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Pick Student'
+	        ),
 	        _react2.default.createElement(_pickstudent2.default, { currStudents: this.state.students })
 	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'col-sm-4 col-md-4 col-lg-4' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Pick Team'
+	        ),
 	        _react2.default.createElement(_pickteam2.default, { currStudents: this.state.students })
 	      )
 	    );
@@ -31315,16 +31333,37 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'container' },
 	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.pickStudent },
-	        'Pick Student'
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.pickStudent },
+	          'Pick Student'
+	        )
 	      ),
 	      _react2.default.createElement(
-	        'label',
-	        null,
-	        this.state.studentName
+	        'div',
+	        { id: 'victim' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Victim: '
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            this.state.studentName
+	          )
+	        )
 	      )
 	    );
 	  }
@@ -31402,7 +31441,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'container' },
 	      _react2.default.createElement('input', { id: 'iptTeam', type: 'number', onChange: this.onInputChange, min: '2', placeholder: '2' }),
 	      _react2.default.createElement(
 	        'button',
