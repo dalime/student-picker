@@ -20,11 +20,19 @@ const AddStudent = React.createClass({
     }
   },
   addStudent() {
-    let student = {
-      text: this.state.text,
-      id: uuid()
-    };
-    this.props.add(student);
+    if (this.state.text.includes(",")) {
+      let arrStudents = this.state.text.split(/,\s*/);
+      let newStudents = arrStudents.map(student => {
+        return {text: student, id: uuid()};
+      });
+      this.props.add(newStudents);
+    } else {
+      let student = {
+        text: this.state.text,
+        id: uuid()
+      };
+      this.props.add(student);
+    }
     this.setState({text: ""});
   },
   onInputChange(event) {

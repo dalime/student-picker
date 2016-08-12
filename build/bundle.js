@@ -30916,11 +30916,19 @@
 	    };
 	  },
 	  addStudent: function addStudent() {
-	    var student = {
-	      text: this.state.text,
-	      id: (0, _uuid2.default)()
-	    };
-	    this.props.add(student);
+	    if (this.state.text.includes(",")) {
+	      var arrStudents = this.state.text.split(/,\s*/);
+	      var newStudents = arrStudents.map(function (student) {
+	        return { text: student, id: (0, _uuid2.default)() };
+	      });
+	      this.props.add(newStudents);
+	    } else {
+	      var student = {
+	        text: this.state.text,
+	        id: (0, _uuid2.default)()
+	      };
+	      this.props.add(student);
+	    }
 	    this.setState({ text: "" });
 	  },
 	  onInputChange: function onInputChange(event) {
@@ -31379,7 +31387,6 @@
 	    localStorage.students = JSON.stringify(this.state.students);
 	  },
 	  addStudent: function addStudent(student) {
-	    console.log(student);
 	    this.setState({
 	      students: this.state.students.concat(student)
 	    });

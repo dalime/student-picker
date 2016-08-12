@@ -151,7 +151,6 @@ const StudentList = React.createClass({
     localStorage.students = JSON.stringify(this.state.students);
   },
   addStudent(student) {
-    console.log(student);
     this.setState({
       students: this.state.students.concat(student)
     });
