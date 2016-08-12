@@ -31197,181 +31197,23 @@
 
 	var _addstudent2 = _interopRequireDefault(_addstudent);
 
+	var _pickstudent = __webpack_require__(183);
+
+	var _pickstudent2 = _interopRequireDefault(_pickstudent);
+
+	var _pickteam = __webpack_require__(184);
+
+	var _pickteam2 = _interopRequireDefault(_pickteam);
+
+	var _editform = __webpack_require__(185);
+
+	var _editform2 = _interopRequireDefault(_editform);
+
+	var _currentlist = __webpack_require__(186);
+
+	var _currentlist2 = _interopRequireDefault(_currentlist);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var TeamList = _react2.default.createClass({
-	  displayName: 'TeamList',
-	  render: function render() {
-	    var teamNames = this.props.teamNames;
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      teamNames
-	    );
-	  }
-	});
-
-	var PickTeam = _react2.default.createClass({
-	  displayName: 'PickTeam',
-	  getInitialState: function getInitialState() {
-	    return {
-	      teamsize: 1,
-	      teams: []
-	    };
-	  },
-	  pickTeam: function pickTeam(event) {
-	    this.setState({ teamsize: document.getElementById('iptTeam').value });
-	    var studentList = this.props.currStudents;
-	    var teamNames = _lodash2.default.chunk(_lodash2.default.shuffle(studentList), this.state.teamsize);
-	    var teams = teamNames.map(function (team, index) {
-	      var ul = _react2.default.createElement(
-	        'ul',
-	        { key: index + 1 },
-	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          'Team ',
-	          index + 1,
-	          ' '
-	        ),
-	        team.map(function (student) {
-	          return _react2.default.createElement(
-	            'li',
-	            { key: student.id },
-	            student.text
-	          );
-	        })
-	      );
-	      return ul;
-	    });
-	    this.setState({ teams: teams });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement('input', { id: 'iptTeam', type: 'number', onChange: this.onInputChange }),
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.pickTeam },
-	        'Pick Team'
-	      ),
-	      _react2.default.createElement(TeamList, { teamNames: this.state.teams })
-	    );
-	  }
-	});
-
-	var PickStudent = _react2.default.createClass({
-	  displayName: 'PickStudent',
-	  getInitialState: function getInitialState() {
-	    return {
-	      studentName: ""
-	    };
-	  },
-	  pickStudent: function pickStudent() {
-	    var randomStudents = _lodash2.default.shuffle(this.props.currStudents);
-	    var randomStudent = randomStudents[0].text;
-	    this.setState({ studentName: randomStudent });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.pickStudent },
-	        'Pick Student'
-	      ),
-	      _react2.default.createElement(
-	        'label',
-	        null,
-	        this.state.studentName
-	      )
-	    );
-	  }
-	});
-
-	var EditForm = _react2.default.createClass({
-	  displayName: 'EditForm',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      text: ""
-	    };
-	  },
-	  onInputChange: function onInputChange(event) {
-	    this.setState({ text: event.target.value });
-	  },
-	  confirmChange: function confirmChange() {
-	    this.props.updateStudent(this.props.studentId, this.state.text);
-	    this.props.formVisible();
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { hidden: this.props.hidden },
-	      _react2.default.createElement('input', { type: 'text', value: this.state.text, onChange: this.onInputChange }),
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.confirmChange },
-	        'Confirm'
-	      )
-	    );
-	  }
-	});
-
-	var OneStudent = _react2.default.createClass({
-	  displayName: 'OneStudent',
-	  getInitialState: function getInitialState() {
-	    return {
-	      visible: "hidden"
-	    };
-	  },
-	  deleteStudent: function deleteStudent() {
-	    var deleteId = this.props.studentId;
-	    this.props.deleteStudent(deleteId);
-	  },
-	  setFormHidden: function setFormHidden() {
-	    this.setState({ visible: "hidden" });
-	  },
-	  updateButtonClick: function updateButtonClick() {
-	    this.setState({ visible: "" });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'li',
-	      null,
-	      this.props.studentText,
-	      _react2.default.createElement(EditForm, { hidden: this.state.visible, formVisible: this.setFormHidden, updateStudent: this.props.updateStudent, studentId: this.props.studentId, studentText: this.props.studentText }),
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-default', onClick: this.deleteStudent },
-	        'Delete'
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-primary', onClick: this.updateButtonClick },
-	        'Update'
-	      )
-	    );
-	  }
-	});
-
-	var CurrentList = _react2.default.createClass({
-	  displayName: 'CurrentList',
-	  render: function render() {
-	    var _this = this;
-
-	    var studentList = this.props.currStudents.map(function (student) {
-	      return _react2.default.createElement(OneStudent, { key: student.id, studentId: student.id, studentText: student.text, deleteStudent: _this.props.delete, updateStudent: _this.props.update });
-	    });
-	    return _react2.default.createElement(
-	      'ul',
-	      null,
-	      studentList
-	    );
-	  }
-	});
 
 	var StudentList = _react2.default.createClass({
 	  displayName: 'StudentList',
@@ -31420,14 +31262,272 @@
 	        null,
 	        'Student List'
 	      ),
-	      _react2.default.createElement(CurrentList, { currStudents: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent }),
-	      _react2.default.createElement(PickStudent, { currStudents: this.state.students }),
-	      _react2.default.createElement(PickTeam, { currStudents: this.state.students })
+	      _react2.default.createElement(_currentlist2.default, { currStudents: this.state.students, 'delete': this.deleteStudent, update: this.updateStudent }),
+	      _react2.default.createElement(_pickstudent2.default, { currStudents: this.state.students }),
+	      _react2.default.createElement(_pickteam2.default, { currStudents: this.state.students })
 	    );
 	  }
 	});
 
 	exports.default = StudentList;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _lodash = __webpack_require__(176);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PickStudent = _react2.default.createClass({
+	  displayName: 'PickStudent',
+	  getInitialState: function getInitialState() {
+	    return {
+	      studentName: ""
+	    };
+	  },
+	  pickStudent: function pickStudent() {
+	    var randomStudents = _lodash2.default.shuffle(this.props.currStudents);
+	    var randomStudent = randomStudents[0].text;
+	    this.setState({ studentName: randomStudent });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.pickStudent },
+	        'Pick Student'
+	      ),
+	      _react2.default.createElement(
+	        'label',
+	        null,
+	        this.state.studentName
+	      )
+	    );
+	  }
+	});
+
+	exports.default = PickStudent;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _lodash = __webpack_require__(176);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TeamList = _react2.default.createClass({
+	  displayName: 'TeamList',
+	  render: function render() {
+	    var teamNames = this.props.teamNames;
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      teamNames
+	    );
+	  }
+	});
+
+	var PickTeam = _react2.default.createClass({
+	  displayName: 'PickTeam',
+	  getInitialState: function getInitialState() {
+	    return {
+	      teamsize: 1,
+	      teams: []
+	    };
+	  },
+	  pickTeam: function pickTeam(event) {
+	    this.setState({ teamsize: document.getElementById('iptTeam').value });
+	    var studentList = this.props.currStudents;
+	    var teamNames = _lodash2.default.chunk(_lodash2.default.shuffle(studentList), this.state.teamsize);
+	    var teams = teamNames.map(function (team, index) {
+	      var ul = _react2.default.createElement(
+	        'ul',
+	        { key: index },
+	        _react2.default.createElement(
+	          'h5',
+	          null,
+	          'Team ',
+	          index + 1,
+	          ' '
+	        ),
+	        team.map(function (student) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: student.id },
+	            student.text
+	          );
+	        })
+	      );
+	      return ul;
+	    });
+	    this.setState({ teams: teams });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement('input', { id: 'iptTeam', type: 'number', onChange: this.onInputChange, min: '2', placeholder: '2' }),
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.pickTeam },
+	        'Pick Team'
+	      ),
+	      _react2.default.createElement(TeamList, { teamNames: this.state.teams })
+	    );
+	  }
+	});
+
+	exports.default = PickTeam;
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EditForm = _react2.default.createClass({
+	  displayName: "EditForm",
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      text: ""
+	    };
+	  },
+	  onInputChange: function onInputChange(event) {
+	    this.setState({ text: event.target.value });
+	  },
+	  confirmChange: function confirmChange() {
+	    this.props.updateStudent(this.props.studentId, this.state.text);
+	    this.props.formVisible();
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { hidden: this.props.hidden },
+	      _react2.default.createElement("input", { type: "text", value: this.state.text, onChange: this.onInputChange }),
+	      _react2.default.createElement(
+	        "button",
+	        { onClick: this.confirmChange },
+	        "Confirm"
+	      )
+	    );
+	  }
+	});
+
+	exports.default = EditForm;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _editform = __webpack_require__(185);
+
+	var _editform2 = _interopRequireDefault(_editform);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var OneStudent = _react2.default.createClass({
+	  displayName: 'OneStudent',
+	  getInitialState: function getInitialState() {
+	    return {
+	      visible: "hidden"
+	    };
+	  },
+	  deleteStudent: function deleteStudent() {
+	    var deleteId = this.props.studentId;
+	    this.props.deleteStudent(deleteId);
+	  },
+	  setFormHidden: function setFormHidden() {
+	    this.setState({ visible: "hidden" });
+	  },
+	  updateButtonClick: function updateButtonClick() {
+	    this.setState({ visible: "" });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'li',
+	      null,
+	      this.props.studentText,
+	      _react2.default.createElement(_editform2.default, { hidden: this.state.visible, formVisible: this.setFormHidden, updateStudent: this.props.updateStudent, studentId: this.props.studentId, studentText: this.props.studentText }),
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'btn btn-default', onClick: this.deleteStudent },
+	        'Delete'
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'btn btn-primary', onClick: this.updateButtonClick },
+	        'Update'
+	      )
+	    );
+	  }
+	});
+
+	var CurrentList = _react2.default.createClass({
+	  displayName: 'CurrentList',
+	  render: function render() {
+	    var _this = this;
+
+	    var studentList = this.props.currStudents.map(function (student) {
+	      return _react2.default.createElement(OneStudent, { key: student.id, studentId: student.id, studentText: student.text, deleteStudent: _this.props.delete, updateStudent: _this.props.update });
+	    });
+	    return _react2.default.createElement(
+	      'ul',
+	      null,
+	      studentList
+	    );
+	  }
+	});
+
+	exports.default = CurrentList;
 
 /***/ }
 /******/ ]);
