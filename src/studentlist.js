@@ -4,10 +4,17 @@ import uuid from 'uuid';
 import AddStudent from './addstudent.js';
 
 const OneStudent = React.createClass({
+  deleteStudent() {
+    let deleteId = this.props.studentId;
+    this.props.deleteStudent(deleteId);
+  },
   render() {
     return (
       <li>
         {this.props.studentText}
+        <button className="btn btn-default" onClick={this.deleteStudent}>
+          Delete
+        </button>
       </li>
     )
   }
@@ -16,8 +23,8 @@ const OneStudent = React.createClass({
 const CurrentList = React.createClass({
   render() {
     let studentList = this.props.currStudents.map(student => {
-      <OneStudent key={student.id} studentId={student.id} studentText={student.text}/>
-    })
+      return <OneStudent key={student.id} studentId={student.id} studentText={student.text} deleteStudent={this.props.delete}/>
+    });
     return (
       <ul>
         {studentList}

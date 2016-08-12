@@ -31176,11 +31176,20 @@
 
 	var OneStudent = _react2.default.createClass({
 	  displayName: 'OneStudent',
+	  deleteStudent: function deleteStudent() {
+	    var deleteId = this.props.studentId;
+	    this.props.deleteStudent(deleteId);
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'li',
 	      null,
-	      this.props.studentText
+	      this.props.studentText,
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'btn btn-default', onClick: this.deleteStudent },
+	        'Delete'
+	      )
 	    );
 	  }
 	});
@@ -31188,8 +31197,10 @@
 	var CurrentList = _react2.default.createClass({
 	  displayName: 'CurrentList',
 	  render: function render() {
+	    var _this = this;
+
 	    var studentList = this.props.currStudents.map(function (student) {
-	      _react2.default.createElement(OneStudent, { key: student.id, studentId: student.id, studentText: student.text });
+	      return _react2.default.createElement(OneStudent, { key: student.id, studentId: student.id, studentText: student.text, deleteStudent: _this.props.delete });
 	    });
 	    return _react2.default.createElement(
 	      'ul',
