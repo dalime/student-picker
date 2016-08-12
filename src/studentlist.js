@@ -26,8 +26,8 @@ const PickTeam = React.createClass({
     let studentList = this.props.currStudents;
     let teamNames = _.chunk(_.shuffle(studentList), this.state.teamsize);
     let teams = teamNames.map((team, index) => {
-      let ul = <ul key={index + 1}>
-        <h3>Team {index + 1} </h3>
+      let ul = <ul key={index}>
+        <h5>Team {index + 1} </h5>
         {
           team.map(student => {
             return <li key={student.id}>{student.text}</li>
