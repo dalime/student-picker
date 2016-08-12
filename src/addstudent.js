@@ -25,6 +25,7 @@ const AddStudent = React.createClass({
       id: uuid()
     };
     this.props.add(student);
+    this.setState({text: ""});
   },
   onInputChange(event) {
     this.setState({text: event.target.value});
